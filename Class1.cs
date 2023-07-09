@@ -7,13 +7,13 @@ namespace booktokicloring
     {
         public static void Main()
         {
-            stringcheak();
+              
         }
 
         public static void stringcheak()
         {
-            string url = "https://newtoki.pro/book/16989/162595";
-            var requested = requestClass.postRequest(url);
+            string url =
+                "https://booktoki295.com/novel/228?stx=%ED%99%94%EC%82%B0%EA%B7%80%ED%99%98&book=%EC%9D%BC%EB%B0%98%EC%86%8C%EC%84%A4&spage=1";
             var htmlparsed = requestClass.dictrequestList(url);
             foreach (var i in htmlparsed)
             {
@@ -21,31 +21,32 @@ namespace booktokicloring
             }
         }
 
-        public static void Listcheack()
+        public static void Listcheack(string url1,string dire,int last)
         {
             int cheaknum = 1;
-            string 제목 = "데뷔 못하면 죽을 병 걸림";
-            for (int i = 162595; i <= 162595; i++)
+
+            for (int i = 1; i <= last; i++)
             {
-                string url = "https://newtoki.pro/book/16989/" + i.ToString();
+                string url =
+                    url1 +
+                    i;
 
 
                 var requested = requestClass.postRequest(url);
                 List<string> htmlparsed = requestClass.dictrequestList(url);
                 Console.WriteLine(htmlparsed);
-                string filed = @"E:\codingstudy\booktokicloring\output\";
+                string filed = dire;
                 string num = cheaknum.ToString();
                 string body = "";
-                htmlparsed.ConvertAll<string>(input =>
-                    {
-                        Console.WriteLine($"[{input}]");
-                        return input;
-                    }
-                );
+                foreach (var j in htmlparsed)
+                {
+                    body += j + "\n";
+                }
 
-
-                //System.IO.File.WriteAllText(filed + 제목 + num + ".txt", body);
+                string 제목 = htmlparsed[1]+i;
+                System.IO.File.WriteAllText(filed + 제목 + ".txt", body);
                 cheaknum++;
+                Thread.Sleep(2000);
             }
         }
     }

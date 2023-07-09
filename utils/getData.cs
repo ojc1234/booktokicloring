@@ -45,7 +45,7 @@ namespace booktokicloring.utils
         }
         private static List<string> htmlParserBoldList(HtmlDocument parseHTML)
         {
-            var XPath = "//*[@id=\"bo_v_con\"]//p[position()>0]";
+            var XPath = "//*[@id=\"novel_content\"]/div[2]";
             HtmlDocument htmlDoc = parseHTML;
             string bodyNode = htmlDoc.DocumentNode.SelectSingleNode(XPath)?.InnerText;
             var mainchild = htmlDoc.DocumentNode.SelectSingleNode(XPath)?.ChildNodes;
