@@ -9,6 +9,7 @@ namespace booktokicloring.utils
 {
     internal class requestClass
     {
+        private const string getNovelxpath = "//*[@id=\"novel_content\"]/div[2]";
         public static string postRequest(string Word)
         {
             String callUrl = Word;
@@ -39,16 +40,16 @@ namespace booktokicloring.utils
             string html = postRequest(url);
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
-            List<string> peno = htmlParserBoldList(htmlDoc);
+            List<string> peno = novelscriptStringList(htmlDoc);
             Console.WriteLine("작동됨");
             return peno;
         }
-        private static List<string> htmlParserBoldList(HtmlDocument parseHTML)
+        private static List<string> novelscriptStringList(HtmlDocument parsedHTML)
         {
-            var XPath = "//*[@id=\"novel_content\"]/div[2]";
-            HtmlDocument htmlDoc = parseHTML;
-            string bodyNode = htmlDoc.DocumentNode.SelectSingleNode(XPath)?.InnerText;
-            var mainchild = htmlDoc.DocumentNode.SelectSingleNode(XPath)?.ChildNodes;
+            var xPath = getNovelxpath;
+            HtmlDocument htmlDoc = parsedHTML;
+            string bodyNode = htmlDoc.DocumentNode.SelectSingleNode(xPath)?.InnerText;
+            var mainchild = htmlDoc.DocumentNode.SelectSingleNode(xPath)?.ChildNodes;
             List<string> array = new List<string>();
             if (mainchild == null) return null;
             foreach (var child in mainchild)
@@ -57,6 +58,14 @@ namespace booktokicloring.utils
             }
 
             return  array;
+        }
+
+        private static string lastest(HtmlDocument parsedHTMl)
+        {
+            string output = string.Empty;
+
+            return output;
+
         }
     }
 }
